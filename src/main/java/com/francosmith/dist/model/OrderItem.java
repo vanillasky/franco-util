@@ -54,7 +54,7 @@ public class OrderItem {
 		if (lineItem.get(ColumnKey.SHIPPING_MEMO) == null || lineItem.get(ColumnKey.SHIPPING_MEMO).getClass() == JSONObject.NULL.getClass()) {
 			item.setIsShipBySupplier(new Boolean(false));
 		} else {
-			if ("¡˜º€".equals(lineItem.getString(ColumnKey.SHIPPING_MEMO).trim())) {
+			if ("ÏßÅÏÜ°".equals(lineItem.getString(ColumnKey.SHIPPING_MEMO).trim())) {
 				item.setIsShipBySupplier(new Boolean(true));
 			} else {
 				item.setIsShipBySupplier(new Boolean(false));
@@ -65,6 +65,8 @@ public class OrderItem {
 		item.setShipCost(PurchaseOrder.parseBigDecimal(lineItem.get(ColumnKey.SHIPPING_COST)));
 		item.setTrackingNumber(PurchaseOrder.parseString(lineItem.get(ColumnKey.TRACKING)));
 		item.setDiscount(PurchaseOrder.parseBigDecimal(lineItem.get(ColumnKey.DISCOUNT)));
+		item.setOptionName(PurchaseOrder.parseString(lineItem.get(ColumnKey.OPTION)));
+		
 		return item;
 	}
 	

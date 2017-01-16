@@ -23,8 +23,8 @@ public class OrderExctrator {
 	
 	final Logger logger = LoggerFactory.getLogger(OrderExctrator.class);
 	
-	public static final SimpleDateFormat SDF_SHIP_DATE = new SimpleDateFormat("yyyy-MM-dd");
-	public static final SimpleDateFormat SDF_ORDER_DATE = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+	public static final SimpleDateFormat SDF_SHIP_DATE = new SimpleDateFormat("yyyy/MM/dd");
+	public static final SimpleDateFormat SDF_ORDER_DATE = new SimpleDateFormat("yyyy/MM/dd HH:mm");
 	
 	private final List<PurchaseOrder> orders = new ArrayList<PurchaseOrder>();
 	private final Map<String, PurchaseOrder> orderMap = new HashMap<String, PurchaseOrder>();

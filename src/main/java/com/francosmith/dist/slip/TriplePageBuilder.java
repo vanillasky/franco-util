@@ -40,6 +40,7 @@ public class TriplePageBuilder implements SlipBuilder {
 	private static final Logger logger = LoggerFactory.getLogger(TriplePageBuilder.class);
 	private static final Map<String, String> channelMap;
 	private static final String DEFAULT_CHANNEL = Config.getString("shopping_channels.default"); 
+	private static final int MERGE_OPTION = Config.getInt("slip.prodcut_name.merge");
 	private static final float FONT_SIZE = 7.2f;		
 	
 	
@@ -338,7 +339,14 @@ public class TriplePageBuilder implements SlipBuilder {
 		int rowNum = 0;
 		
 		for (OrderItem item : items) {
-			table.addCell(createLineItemCell(item.getProdcutName(), TextAlignment.LEFT));
+			
+			if (MERGE_OPTION == 1 && item.getOptionName() != null && item.getOptionName().length() > 0) {
+				table.addCell(createLineItemCell(item.getProdcutName() + "/" + item.getOptionName(), TextAlignment.LEFT));
+			} else {
+				table.addCell(createLineItemCell(item.getProdcutName(), TextAlignment.LEFT));
+			}
+			
+			
 			table.addCell(createLineItemCell(String.valueOf(item.getOrderQuantity()), TextAlignment.RIGHT));
 			table.addCell(createLineItemCell(String.valueOf(item.getShipQuantity()), TextAlignment.RIGHT));
 			table.addCell(createLineItemCell(df.format(item.getPrice()), TextAlignment.RIGHT));

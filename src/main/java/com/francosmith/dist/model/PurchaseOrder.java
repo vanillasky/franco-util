@@ -8,10 +8,14 @@ import java.util.List;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.francosmith.dist.slip.OrderExctrator;
 
 public class PurchaseOrder {
+	public static final Logger logger = LoggerFactory.getLogger(PurchaseOrder.class);
+	
 	public static final String FREIGHT_COMPANY = "CJ≈√πË";
 	public static final String CHANNEL_NAVER = "N";
 	public static final String CHANNEL_SHOP = "F";
@@ -106,7 +110,17 @@ public class PurchaseOrder {
 			return null;
 		}
 		
-		return OrderExctrator.SDF_ORDER_DATE.format(obj);
+		String result;
+		
+		try {
+			result = OrderExctrator.SDF_ORDER_DATE.format(obj);
+		} catch (IllegalArgumentException e) {
+			e.printStackTrace();
+//			System.out.println("Obj:" + obj.getClass());
+//			System.out.println("Obj toString:" + obj.toString());
+			result = obj.toString();
+		}
+		return result;
 	}
 	
 	

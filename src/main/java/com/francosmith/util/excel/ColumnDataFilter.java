@@ -51,6 +51,7 @@ public class ColumnDataFilter extends DefaultDataFilter {
 			if (isMatchedRow(row)) {
 				for (String columnKey : colNames) {
 					cell = row.getCell(columnNameMap.get(columnKey), Row.CREATE_NULL_AS_BLANK);
+					if (columnKey.equals("ORDER_DATE")) logger.debug("{} : Date {}", row.getRowNum(), cell);
 					record.put(columnKey, cellHandler.process(cell));
 				}
 				
